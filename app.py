@@ -1,11 +1,13 @@
-from flask import Flask
+from flask import Flask, render_template, request, redirect, url_for
+import db as dbase
+from product import Product
 
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Hello, Flask!"
+    return render_template("index.html")
 
 @app.route("/add_product")
 def add_product():
