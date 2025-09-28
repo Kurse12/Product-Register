@@ -1,0 +1,152 @@
+body {
+    background: linear-gradient(120deg, #0f2027, #203a43, #2c5364, #0f2027);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    position: relative;
+    user-select: none;
+    overflow: hidden; /* evita scroll por animación de líneas */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+
+    /* Animación tipo ola */
+    animation: waveLines 2s linear infinite;
+}
+
+/* Animación de las líneas de fondo */
+@keyframes waveLines {
+    0% {
+        background-position: 0 0, 0 0;
+    }
+    100% {
+        background-position: 50px 50px, 50px 50px;
+    }
+}
+
+h1 {
+    position: relative;
+    top: 100px; /* mueve solo el h1 hacia abajo */
+    padding-top: 0; /* ya no necesitas padding */
+}
+
+
+
+.card {
+    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 200, 0.5);
+    transform: translateY(-5px);
+}
+
+.card-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+    color: #00fff7;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+    font-weight: bold;
+}
+
+.form-control {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #e0e0e0;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: #00fff7;
+    box-shadow: 0 0 10px #00fff7;
+    color: #fff;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00fff7, #00d4ff);
+    border: none;
+    color: #0d0d0d;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #00e6f7, #00aaff);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.9);
+    transform: scale(1.05);
+}
+
+.alert {
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.4);
+    background: rgba(0, 20, 20, 0.7);
+    color: #00fff7;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+label {
+    color: #00fff7; /* Cyan neón */
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* ======= INPUT TYPE NUMBER: SIN SPIN BUTTONS ======= */
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Chrome, Safari, Edge */
+    margin: 0;
+}
+
+/* Scroll general */
+::-webkit-scrollbar {
+    width: 10px; /* ancho del scroll */
+}
+
+/* Fondo de la barra */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+/* La parte que se mueve */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00f2ff, #0066ff);
+    border-radius: 10px;
+    box-shadow: 0 0 5px #00f2ff;
+}
+
+/* Hover sobre la parte que se mueve */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #00ffcc, #0033cc);
+}

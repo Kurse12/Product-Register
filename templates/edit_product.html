@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container d-flex justify-content-center align-items-center" style="height: calc(100vh - 80px);">
+    <!-- height: calc(100vh - 80px) deja espacio para el h1 -->
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-center">Actualizar Producto</h5>
+            </div>
+            <div class="card-body">
+                <form action="/update_product/{{dataProduct._id}}" method="POST">
+                    <label for="">Nombre:</label>
+                    <input type="text" minlength="4" name="nombre" class="form-control mb-3"
+                        value="{{dataProduct.nombre}}" required>
+
+                    <label for="">Precio:</label>
+                    <input type="number" step="0.01" min="1" name="precio" class="form-control mb-3"
+                        value="{{dataProduct.precio}}" required>
+
+                    <label for="">Cantidad:</label>
+                    <input type="number" min="1" name="cantidad" class="form-control mb-3"
+                        value="{{dataProduct.cantidad}}" required>
+
+                    <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
