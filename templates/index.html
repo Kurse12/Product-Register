@@ -1,76 +1,80 @@
-{% extends 'layout.html' %} 
+{% extends 'layout.html' %}
 
 {% block body %}
 
-<!-- Contenedor centrado horizontal y verticalmente -->
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh">
-    <div class="row g-4 w-100">
-        <!-- g-4 = gap entre columnas -->
+<!-- Barra de búsqueda -->
+<section class="search-bar">
+    <form action="/search" method="get" class="search-form">
+        <input type="text" name="q" placeholder="Buscar..." class="search-input">
+        <button type="submit" class="search-button">Buscar</button>
+    </form>
+</section>
 
-        <!-- Columna Formulario -->
-        <div class="col-md-6 mb-3">
+<!-- Contenedor principal -->
+<main class="main-container">
+    <div class="columns-row">
+        
+        <!-- Columna izquierda: Formulario -->
+        <div class="column column-form">
             <!-- Mensajes Flash -->
             {% with messages = get_flashed_messages() %}
-            {% if messages %} 
-            {% for message in messages %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {% endfor %}
-            {% endif %} 
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert-message">
+                    <span>{{ message }}</span>
+                    <button type="button" class="btn-close" onclick="this.parentElement.style.display='none'">×</button>
+                </div>
+                {% endfor %}
+            {% endif %}
             {% endwith %}
 
             <!-- Card Registrar Producto -->
-            <div class="card">
+            <div class="card card-form">
                 <div class="card-header">
-                    <h5 class="text-center">Registrar Producto</h5>
+                    <h5>Registrar Producto</h5>
                 </div>
-
                 <div class="card-body">
-                    <form action="/add_product" method="POST">
-                        <label for="">Nombre:</label>
-                        <input type="text" minlength="4" name="nombre" class="form-control mb-3" required />
+                    <form action="/add_product" method="POST" class="product-form">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" minlength="4" class="form-control" required>
 
-                        <label for="">Precio:</label>
-                        <input type="number" step="0.01" min="1" name="precio" class="form-control mb-3" required />
+                        <label for="precio">Precio:</label>
+                        <input type="number" id="precio" name="precio" step="0.01" min="1" class="form-control" required>
 
-                        <label for="">Cantidad:</label>
-                        <input type="number" min="1" name="cantidad" class="form-control mb-3" required />
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" id="cantidad" name="cantidad" min="1" class="form-control" required>
 
-                        <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                        <button type="submit" class="btn-primary">Guardar</button>
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- Columna Tabla -->
-        <div class="col-md-6 text-center">
-            <div class="card">
+        <!-- Columna derecha: Tabla -->
+        <div class="column column-table">
+            <div class="card card-table">
                 <div class="card-header">
-                    <h5>Lista - Productos</h5>
+                    <h5>Lista de Productos</h5>
                 </div>
-
-                <!-- Contenedor con scroll -->
-                <div style="max-height: 400px; overflow-y: auto">
-                    <table class="table table-hover table-dark table-striped align-middle">
+                <div class="table-wrapper">
+                    <table class="product-table">
                         <thead>
                             <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Operacion</th>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Operación</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for product in dataProducts %}
                             <tr>
-                                <td>{{ product.nombre }}</td>
+                                <td class="product-name">{{ product.nombre }}</td>
                                 <td>{{ product.precio }}</td>
                                 <td>{{ product.cantidad }}</td>
                                 <td>
-                                    <a href="/edit_products/{{product._id}}" class="btn btn-secondary btn-sm me-3">Editar</a>
-                                    <a href="/delete_product/{{product._id}}" class="btn btn-danger btn-sm btn-delete">Eliminar</a>
+                                    <a href="/edit_products/{{ product._id }}" class="btn-secondary">Editar</a>
+                                    <a href="/delete_product/{{ product._id }}" class="btn-delete">Eliminar</a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -79,7 +83,8 @@
                 </div>
             </div>
         </div>
+
     </div>
-</div>
+</main>
 
 {% endblock %}

@@ -17,6 +17,18 @@ def index():
     data = products.find()
     return render_template("index.html", dataProducts = data)
 
+@app.route("/search")
+def search():
+    query = request.args.get("q", "").strip()
+    
+    if query:
+        products_cursor = db['products'].find({"nombre": {"$regex": query, "$options": "i"}})
+    else:
+        products_cursor = db['products'].find()
+    
+    dataProducts = list(products_cursor)
+    return render_template("index.html", dataProducts=dataProducts)
+
 @app.route("/add_product", methods = ["POST"])
 def add_product():
     if request.method == "POST":
